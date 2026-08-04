@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import {
   ShoppingCart, LogIn, Utensils, MessageCircle, X, Send,
   Sparkles, LogOut, Trash2, CheckCircle, AlertCircle, Shield,
-  TrendingUp, Package, Clock, Check, Receipt, ChevronRight, ArrowLeft
+  TrendingUp, Package, Clock, Check, ChevronRight, ArrowLeft
 } from 'lucide-react';
 import { supabase } from './lib/supabase';
 import './index.css';
@@ -38,16 +38,16 @@ interface Toast {
    ═══════════════════════════════════════════ */
 const MENU_ITEMS: Product[] = [
   // DRINKS
-  { id: 'd1', name: 'Neon Nectar', category: 'Drinks', price: 500, image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=600&auto=format&fit=crop', description: 'Electric citrus blend with a glowing finish.' },
-  { id: 'd2', name: 'Quantum Cola', category: 'Drinks', price: 800, image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop', description: 'Fizzy dark energy drink to keep you awake across galaxies.' },
+  { id: 'd1', name: 'Neon Nectar', category: 'Drinks', price: 500, image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop', description: 'Electric citrus blend with a glowing finish.' },
+  { id: 'd2', name: 'Quantum Cola', category: 'Drinks', price: 800, image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=600&auto=format&fit=crop', description: 'Fizzy dark energy drink to keep you awake across galaxies.' },
   { id: 'd3', name: 'Midnight Mojito', category: 'Drinks', price: 650, image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=600&auto=format&fit=crop', description: 'Minty lime refresher crafted in complete darkness.' },
   { id: 'd4', name: 'Berry Matrix Shake', category: 'Drinks', price: 900, image: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?q=80&w=600&auto=format&fit=crop', description: 'Triple berry smoothie infused with simulated reality.' },
   { id: 'd5', name: 'Cyberpunk Latte', category: 'Drinks', price: 750, image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=600&auto=format&fit=crop', description: 'Espresso infused with sweet vanilla and neon foam.' },
   { id: 'd6', name: 'Galactic Slush', category: 'Drinks', price: 600, image: 'https://images.unsplash.com/photo-1572490122747-3968b75bf699?q=80&w=600&auto=format&fit=crop', description: 'Icy blue raspberry perfection from the Andromeda system.' },
-  { id: 'd7', name: 'Venom Shot', category: 'Drinks', price: 1400, image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=600&auto=format&fit=crop', description: 'Concentrated sour apple energy shot. Extremely potent.' },
-  { id: 'd8', name: 'Stardust Tea', category: 'Drinks', price: 550, image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=600&auto=format&fit=crop', description: 'Calming chamomile with shimmering edible glitter.' },
-  { id: 'd9', name: 'Plasma Punch', category: 'Drinks', price: 1200, image: 'https://images.unsplash.com/photo-1587883012610-e3df17d41270?q=80&w=600&auto=format&fit=crop', description: 'Smoking dry-ice fruit punch.' },
-  { id: 'd10', name: 'Liquid Gold', category: 'Drinks', price: 5000, image: 'https://images.unsplash.com/photo-1583223667854-e0e05b1ad4f3?q=80&w=600&auto=format&fit=crop', description: 'Honey & saffron elixir topped with 24k gold leaf.' },
+  { id: 'd7', name: 'Venom Shot', category: 'Drinks', price: 1400, image: 'https://images.unsplash.com/photo-1587883012610-e3df17d41270?q=80&w=600&auto=format&fit=crop', description: 'Concentrated sour apple energy shot. Extremely potent.' },
+  { id: 'd8', name: 'Stardust Tea', category: 'Drinks', price: 550, image: 'https://images.unsplash.com/photo-1583223667854-e0e05b1ad4f3?q=80&w=600&auto=format&fit=crop', description: 'Calming chamomile with shimmering edible glitter.' },
+  { id: 'd9', name: 'Plasma Punch', category: 'Drinks', price: 1200, image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=600&auto=format&fit=crop', description: 'Smoking dry-ice fruit punch.' },
+  { id: 'd10', name: 'Liquid Gold', category: 'Drinks', price: 5000, image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=600&auto=format&fit=crop', description: 'Honey & saffron elixir topped with 24k gold leaf.' },
 
   // WEED
   { id: 'w1', name: 'Purple Haze OG', category: 'Weed', price: 15000, image: 'https://images.unsplash.com/photo-1603807920395-58da53f932e6?q=80&w=600&auto=format&fit=crop', description: 'Premium indica strain for deep relaxation.' },
@@ -60,10 +60,10 @@ const MENU_ITEMS: Product[] = [
   { id: 'w8', name: 'Moon Rocks', category: 'Weed', price: 35000, image: 'https://images.unsplash.com/photo-1581452695507-68c1303cc56f?q=80&w=600&auto=format&fit=crop', description: 'Nugs dipped in oil and rolled in kief. Handle with care.' },
 
   // OTHERS (FOOD)
-  { id: 'o1', name: 'Spicy Cyber Noodles', category: 'Others', price: 1200, image: 'https://images.unsplash.com/photo-1612929633738-8fe01f746761?q=80&w=600&auto=format&fit=crop', description: 'Fire-level ramen bowl with crispy pork.' },
+  { id: 'o1', name: 'Spicy Cyber Noodles', category: 'Others', price: 1200, image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=600&auto=format&fit=crop', description: 'Fire-level ramen bowl with crispy pork.' },
   { id: 'o2', name: 'Void Burger', category: 'Others', price: 2800, image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop', description: 'Double wagyu patty on a pitch-black charcoal bun.' },
   { id: 'o3', name: 'Loaded Nachos', category: 'Others', price: 1800, image: 'https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?q=80&w=600&auto=format&fit=crop', description: 'Cheese, jalapeños, and guacamole mountain.' },
-  { id: 'o4', name: 'Galaxy Pizza', category: 'Others', price: 3200, image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600&auto=format&fit=crop', description: 'Wood-fired pizza with vibrant, color-shifting cheese.' },
+  { id: 'o4', name: 'Galaxy Pizza', category: 'Others', price: 3200, image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop', description: 'Wood-fired pizza with vibrant, color-shifting cheese.' },
   { id: 'o5', name: 'Brownie Lava Cake', category: 'Others', price: 1400, image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=600&auto=format&fit=crop', description: 'Molten chocolate centre with vanilla scoop.' },
   { id: 'o6', name: 'Neon Sushi Roll', category: 'Others', price: 2200, image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=600&auto=format&fit=crop', description: 'Spicy tuna with a fluorescent wasabi drizzle.' },
   { id: 'o7', name: 'Plasma Tacos', category: 'Others', price: 1600, image: 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=600&auto=format&fit=crop', description: 'Three street tacos with fiery glowing salsa.' },
@@ -487,7 +487,7 @@ function AdminDashboard({ isAdmin, addToast }: { isAdmin: boolean, addToast: (ms
     // Subscribe to real-time changes on the orders table
     const subscription = supabase
       .channel('public:orders')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, (payload) => {
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, () => {
         // When any change happens, just re-fetch orders to keep it simple and get the related profile email
         fetchOrders();
       })
